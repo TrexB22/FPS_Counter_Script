@@ -1,8 +1,4 @@
 # Simple FPS Counter Script
-I've written this script after watching a video by Code Monkey. 
-
-YouTube Link: https://www.youtube.com/shorts/I2r97r9h074
-
 **Usage Instructions:**
 1. Create a new GameObject and assign it a name of your choice, ensuring it carries a significant and informative title, such as "FPS Counter," for instance.
 2. Now, proceed to download the FPSCounter script from this repository and attach it to the previously created GameObject as described in the initial step.
