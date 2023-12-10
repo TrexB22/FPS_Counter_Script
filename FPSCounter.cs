@@ -1,42 +1,59 @@
 using UnityEngine;
 using TMPro;
 
-// YouTube Link (Code Monkey) : https://www.youtube.com/watch?v=I2r97r9h074
+// YouTube Video Link : https://www.youtube.com/watch?v=I2r97r9h074
 
-public class FPSCounter : MonoBehaviour
-{
+namespace CodeMonkey.SimpleFpsCounter {
 
-    [SerializeField] private TextMeshProUGUI fpsCounter;
+    /// <summary>
+    /// This script provides average and consistently smooth FPS values.
+    /// </summary>
+    public class FPSCounter : MonoBehaviour {
 
-    private int lastFrameIndex;
+        #region Fields
 
-    private float[] frameDeltaTimeArray;
+        [SerializeField] private TextMeshProUGUI fpsCounter;
 
-    private void Awake() {
-        frameDeltaTimeArray = new float[50];
-    }
+        private int lastFrameIndex;
 
-    void Update()
-    {
+        private float[] frameDeltaTimeArray;
 
-        frameDeltaTimeArray[lastFrameIndex] = Time.unscaledDeltaTime;
+        #endregion
 
-        lastFrameIndex = (lastFrameIndex +1 ) % frameDeltaTimeArray.Length;
+        #region Event Functions
 
-        fpsCounter.text = Mathf.RoundToInt(CalculateFPS()).ToString();
+        private void Awake() {
+            frameDeltaTimeArray = new float[50];
+        }
 
-    }
+        void Update() {
 
-    private float CalculateFPS() {
+            frameDeltaTimeArray[lastFrameIndex] = Time.unscaledDeltaTime;
 
-        float total = 0f;
+            lastFrameIndex = (lastFrameIndex + 1) % frameDeltaTimeArray.Length;
 
-        foreach (float unscaledDeltaTime in frameDeltaTimeArray) {
-            total += unscaledDeltaTime;
-        }   
+            fpsCounter.text = Mathf.RoundToInt(CalculateFPS()).ToString();
 
-        return frameDeltaTimeArray.Length/total;
+        }
 
-    }
+        #endregion
 
-} // class
+        #region Average FPS Calculation Logic
+
+        private float CalculateFPS() {
+
+            float total = 0f;
+
+            foreach (float unscaledDeltaTime in frameDeltaTimeArray) {
+                total += unscaledDeltaTime;
+            }
+
+            return frameDeltaTimeArray.Length / total;
+
+        }
+
+        #endregion
+
+    } // class
+
+} // namespace
